@@ -1,0 +1,201 @@
+:root{
+  --dx-bg: #0b1220;               
+  --dx-text: #e6e8ee;
+  --dx-muted: #9aa4b2;
+
+  --dx-card: rgba(255,255,255,.04);
+  --dx-card-border: rgba(255,255,255,.10);
+
+  --dx-accent: #7c9eff;            
+  --dx-accent-2: #45e0b6;          
+  --dx-danger: #ef4444;
+  --dx-warn: #f59e0b;
+
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --glass-blur: 8px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: system-ui, sans-serif;
+
+    background: url("https://img.freepik.com/vetores-gratis/simbolo-medico-plano_23-2149496593.jpg?w=740&q=80") no-repeat center center fixed;
+    background-size: cover;
+
+    position: relative;
+  }
+
+body::before {
+  content: none;
+}
+
+.container-card{
+  max-width:900px;
+  margin:0 auto;
+}
+.dx-card {
+  background: var(--dx-card);
+  border: 1px solid var(--dx-card-border);
+  border-radius: var(--radius-lg);
+  padding:1.25rem;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.55);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+
+.text-center h1{
+  margin:0 0 .25rem 0;
+  font-weight:600;
+  letter-spacing:-0.02em;
+  font-size:clamp(1.4rem, 2.4vw, 2rem);
+}
+.text-center p{ color:var(--dx-muted); margin:0 0 1rem 0; }
+
+textarea.form-control,
+#text-input.form-control,
+input.form-control {
+
+  color: var(--dx-text) !important;      
+  background: rgba(2,6,23,0.55) !important; 
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  caret-color: var(--dx-accent) !important;
+}
+
+
+textarea.form-control::placeholder,
+#text-input.form-control::placeholder,
+input.form-control::placeholder {
+  color: rgba(230,232,238,0.7) !important;
+  opacity: 1 !important;
+}
+
+textarea.form-control:focus,
+#text-input.form-control:focus,
+input.form-control:focus {
+  background: rgba(255,255,255,0.03) !important;
+  border-color: rgba(124,158,255,0.7) !important;
+  box-shadow: 0 8px 22px rgba(124,158,255,0.06) !important;
+  color: var(--dx-text) !important;
+}
+
+#text-input {
+  color: var(--dx-text) !important;
+  background: rgba(2,6,23,0.55) !important;
+}
+
+
+.d-flex.gap-2{ margin-top:.5rem; display:flex; gap:.5rem; flex-wrap:wrap; }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.6rem .95rem;
+  border-radius: 10px;
+  border:1px solid transparent;
+  font-weight:600;
+  cursor:pointer;
+  min-height:44px;
+}
+
+.btn-primary{
+  background: linear-gradient(90deg, var(--dx-accent), var(--dx-accent-2));
+  color:white;
+  box-shadow: 0 10px 28px rgba(76,103,255,.14), inset 0 -1px 0 rgba(0,0,0,.06);
+  transition: box-shadow .12s ease, transform .12s ease, filter .12s ease;
+}
+.btn-primary:hover{
+  box-shadow: 0 14px 36px rgba(76,103,255,.18);
+  transform: translateY(-2px);
+}
+.btn-primary:active{ transform: translateY(0); box-shadow: 0 8px 20px rgba(76,103,255,.12); }
+
+.btn-outline-secondary{
+  color:var(--dx-text);
+  background: transparent;
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:none;
+}
+.btn-outline-secondary:hover{
+  background: rgba(255,255,255,.03);
+}
+
+.alert{
+  border-radius: 12px;
+  padding:.8rem 1rem;
+  margin:0;
+  font-size:.95rem;
+}
+.alert.alert-warning{
+  background: rgba(245,158,11,.10);
+  color:#ffecc3;
+  border:1px solid rgba(245,158,11,.25);
+}
+.alert.alert-secondary{
+  background: rgba(148,163,184,.06);
+  color:#d5dbe6;
+  border:1px solid rgba(148,163,184,.12);
+}
+.alert.alert-light{
+  background: rgba(255,255,255,.02);
+  color:var(--dx-muted);
+  border:1px solid rgba(255,255,255,.04);
+}
+
+.list-group-numbered{
+  list-style-position: inside;
+  padding-left:1rem;
+  margin:0;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.03);
+}
+.list-group-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  padding:.65rem .75rem;
+  background:transparent;
+  border-bottom:1px dashed rgba(255,255,255,.02);
+  color:var(--dx-text);
+}
+.list-group-item:last-child{ border-bottom:0; }
+
+.badge{
+  padding:.35rem .6rem;
+  border-radius:8px;
+  font-weight:600;
+  font-size:.85rem;
+}
+.bg-danger{ background: rgba(239,68,68,.16); color:var(--dx-danger); }
+.bg-warning{ background: rgba(245,158,11,.10); color:var(--dx-warn); }
+.bg-info{ background: rgba(59,130,246,.10); color:#0ea5e9; }
+.bg-success{ background: rgba(34,197,94,.10); color:#22c55e; }
+.bg-secondary{ background: rgba(148,163,184,.06); color:var(--dx-muted); }
+
+@media (max-width:767px){
+  .dx-card{ padding:1rem; border-radius:14px; }
+  .d-flex.gap-2{ flex-direction:column; }
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --dx-bg:#f7f8fb;
+    --dx-text:#0e1525;
+    --dx-muted:#667085;
+    --dx-card: rgba(255,255,255,.9);
+    --dx-card-border: rgba(14,21,37,.06);
+  }
+  body{
+    color:var(--dx-text);
+    background:
+      radial-gradient(1100px 600px at 110% -10%, rgba(124,158,255,.09), transparent 40%),
+      radial-gradient(900px 520px at -10% 10%, rgba(69,224,182,.06), transparent 40%),
+      linear-gradient(180deg, #0843f5 0%, #5fe47c 100%);
+  }
+  .dx-card{ backdrop-filter: blur(6px); box-shadow: 0 8px 20px rgba(6,10,30,.06); }
+  .form-control{ background: rgb(238, 4, 4); border:1px solid rgba(14,21,37,.06); color:var(--dx-text); }
+  .btn-outline-secondary{ border-color: rgba(14,21,37,.06); }
+}

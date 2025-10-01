@@ -1,0 +1,134 @@
+﻿@page
+@model ML_2025.Pages.IndexModel
+@{
+    ViewData["Title"] = "Análise de Sintomas";
+}
+
+<style>
+  :root{
+    --dx-text: #e6e8ee;
+    --dx-muted: #9aa4b2;
+  }
+  html, body { height: 100%; margin: 0; }
+
+  body {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    color: var(--dx-text);
+
+    background-image:
+      linear-gradient(rgba(6,10,20,0.64), rgba(6,10,20,0.64)),
+      url("https://img.freepik.com/vetores-gratis/simbolo-medico-plano_23-2149496593.jpg?semt=ais_hybrid&w=740&q=80");          
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding: 2.5rem 1rem;
+  }
+
+  body::before { content: none !important; }
+
+  .container-card{ max-width: 900px; margin: 0 auto; }
+  .dx-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 14px;
+    padding: 1.25rem;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.55);
+    backdrop-filter: blur(8px);
+  }
+
+
+</style>
+
+<div class="container-card">
+  <div class="text-center">
+      <h1 class="display-4">Análise de Sintomas</h1>
+      <p>Descreva seus sintomas para obter possíveis hipóteses e uma sugestão de triagem.</p>
+  </div>
+
+  <div class="dx-card mt-3">
+    <form method="post">
+        @Html.AntiForgeryToken()  
+        <div class="form-group mb-3">
+            <label for="text-input" class="form-label">Descreva seus sintomas:</label>
+            <textarea asp-for="InputText" class="form-control" id="text-input" rows="5"
+                      placeholder="Ex.: Febre há 2 dias, dor de garganta, coriza..."></textarea>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn-primary">Analisar</button>
+        </div>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model?.MlStatusMessage))
+    {
+        <div class="alert alert-warning mt-3">
+            @Model.MlStatusMessage
+        </div>
+    }
+
+    @if (Model?.DxResult != null)
+    {
+        var triage = Model.DxResult.Triage?.ToLowerInvariant() ?? "";
+        var triageClass = triage switch
+        {
+            "emergente" => "badge bg-danger",
+            "procurar_atendimento" => "badge bg-warning text-dark",
+            "consulta_ambulatorial" => "badge bg-info text-dark",
+            "autocuidado" => "badge bg-success",
+            _ => "badge bg-secondary"
+        };
+
+        <div id="dx-results" class="mt-4">
+            <div class="d-flex justify-content-between align-items-start flex-wrap">
+                <h4 class="card-title mb-2">Resultados</h4>
+                <span class="@triageClass" title="Sugestão de nível de urgência">
+                    Triagem: @Model.DxResult.Triage
+                </span>
+            </div>
+            <p class="text-muted mb-3">
+                Mostrando as hipóteses mais prováveis com suas respectivas confidências.
+            </p>
+
+            @if (Model.DxResult.Predictions != null && Model.DxResult.Predictions.Any())
+            {
+                <ol class="list-group list-group-numbered">
+                    @foreach (var p in Model.DxResult.Predictions.Take(3))
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div><strong>@p.Label</strong></div>
+                            <span class="badge bg-primary rounded-pill">
+                                @p.Probability.ToString("P1")
+                            </span>
+                        </li>
+                    }
+                </ol>
+            }
+            else
+            {
+                <div class="alert alert-secondary mt-3">
+                    Não foi possível gerar hipóteses com confiança suficiente.
+                </div>
+            }
+        </div>
+
+        <div class="alert alert-light border mt-3">
+            <small>
+                <strong>Observação:</strong> se as confidências estiverem baixas, descreva mais detalhes
+                (tempo de sintomas, intensidade da dor 0–10, febre (°C), comorbidades, gatilhos).
+            </small>
+        </div>
+    }
+  </div>
+</div>
+
+<script>
+  (function () {
+    const r = document.getElementById('dx-results');
+    if (r) r.scrollIntoView({behavior: 'smooth', block: 'start'});
+  })();
+</script>

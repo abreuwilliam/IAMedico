@@ -5,130 +5,284 @@
 }
 
 <style>
-  :root{
-    --dx-text: #e6e8ee;
-    --dx-muted: #9aa4b2;
+  :root {
+    /* Dark Mode Colors */
+    --text-dark: #e6e8ee;
+    --muted-dark: #9aa4b2;
+    --bg-dark: #0d1117;
+    --card-dark: rgba(255,255,255,0.05);
+    --border-dark: rgba(255,255,255,0.15);
+    --accent-dark: #4f9cff;
+    --success-dark: #1db954;
+    --warning-dark: #ff9f43;
+    --danger-dark: #ff5c5c;
+    --info-dark: #00bcd4;
+    --glow-dark: 0 8px 30px rgba(0,0,0,0.55);
+
+    /* Light Mode Colors */
+    --text-light: #0d1117;
+    --muted-light: #555;
+    --bg-light: #f8f9fa;
+    --card-light: rgba(0,0,0,0.05);
+    --border-light: rgba(0,0,0,0.15);
+    --accent-light: #4f9cff;
+    --success-light: #28a745;
+    --warning-light: #ffc107;
+    --danger-light: #dc3545;
+    --info-light: #17a2b8;
+    --glow-light: 0 8px 30px rgba(0,0,0,0.15);
   }
-  html, body { height: 100%; margin: 0; }
 
   body {
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-    color: var(--dx-text);
-
-    background-image:
-      linear-gradient(rgba(6,10,20,0.64), rgba(6,10,20,0.64)),
-      url("https://img.freepik.com/vetores-gratis/simbolo-medico-plano_23-2149496593.jpg?semt=ais_hybrid&w=740&q=80");          
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    margin: 0;
     min-height: 100vh;
-    position: relative;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding: 2.5rem 1rem;
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
   }
 
-  body::before { content: none !important; }
+  header {
+    width: 100%;
+    height: 35vh; /* Altura proporcional */
+    background: url("https://img.freepik.com/vetores-gratis/simbolo-medico-plano_23-2149496593.jpg?semt=ais_hybrid&w=740&q=80") center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    border-radius: 18px;
+    margin: 2rem auto 1rem auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    transition: all 0.3s ease;
+  }
 
-  .container-card{ max-width: 900px; margin: 0 auto; }
+  header h1 { font-size: 3rem; margin: 0.5rem 0; }
+  header p { font-size: 1.2rem; max-width: 600px; }
+
+  .container-card {
+    width: 100%;
+    max-width: 900px;
+    padding: 1rem;
+    margin-top: -60px; /* Sobreposição suave */
+  }
+
   .dx-card {
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.10);
-    border-radius: 14px;
-    padding: 1.25rem;
-    box-shadow: 0 8px 30px rgba(2,6,23,0.55);
-    backdrop-filter: blur(8px);
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: var(--glow-dark);
+    backdrop-filter: blur(12px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
   }
 
+  .dx-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+  }
 
+  .form-label { font-weight: 600; color: var(--text-dark); }
+
+  textarea.form-control {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    color: #fff;
+    resize: none;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+  }
+
+  textarea.form-control:focus {
+    border: 1px solid var(--accent-dark);
+    box-shadow: 0 0 0 3px rgba(79,156,255,0.3);
+    outline: none;
+  }
+
+  .btn-primary {
+    background: var(--accent-dark);
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary:hover {
+    background: #3584e8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79,156,255,0.35);
+  }
+
+  .list-group-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-dark);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .alert {
+    border-radius: 12px;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .result-description {
+    cursor: pointer;
+    overflow: hidden;
+    max-height: 3rem;
+    transition: max-height 0.3s ease;
+    color: var(--text-dark);
+  }
+
+  .result-description.expanded {
+    max-height: 500px;
+  }
+
+  footer {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    padding: 1rem 0;
+    margin: 2rem auto;
+    border-top: 1px solid var(--border-dark);
+    color: var(--muted-dark);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  /* Dark / Light Mode */
+  .light-mode {
+    --bg-dark: var(--bg-light);
+    --text-dark: var(--text-light);
+    --muted-dark: var(--muted-light);
+    --card-dark: var(--card-light);
+    --border-dark: var(--border-light);
+    --glow-dark: var(--glow-light);
+    --accent-dark: var(--accent-light);
+  }
+
+  .badge.bg-success { background-color: var(--success-dark); }
+  .badge.bg-warning { background-color: var(--warning-dark); }
+  .badge.bg-danger { background-color: var(--danger-dark); }
+  .badge.bg-info { background-color: var(--info-dark); }
 </style>
 
+<header>
+    <h1>Análise de Sintomas</h1>
+    <p>Descreva seus sintomas para obter possíveis hipóteses e uma sugestão de triagem.</p>
+</header>
+
 <div class="container-card">
-  <div class="text-center">
-      <h1 class="display-4">Análise de Sintomas</h1>
-      <p>Descreva seus sintomas para obter possíveis hipóteses e uma sugestão de triagem.</p>
-  </div>
-
-  <div class="dx-card mt-3">
-    <form method="post">
-        @Html.AntiForgeryToken()  
-        <div class="form-group mb-3">
-            <label for="text-input" class="form-label">Descreva seus sintomas:</label>
-            <textarea asp-for="InputText" class="form-control" id="text-input" rows="5"
-                      placeholder="Ex.: Febre há 2 dias, dor de garganta, coriza..."></textarea>
-        </div>
-
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn-primary">Analisar</button>
-        </div>
-    </form>
-
-    @if (!string.IsNullOrEmpty(Model?.MlStatusMessage))
-    {
-        <div class="alert alert-warning mt-3">
-            @Model.MlStatusMessage
-        </div>
-    }
-
-    @if (Model?.DxResult != null)
-    {
-        var triage = Model.DxResult.Triage?.ToLowerInvariant() ?? "";
-        var triageClass = triage switch
-        {
-            "emergente" => "badge bg-danger",
-            "procurar_atendimento" => "badge bg-warning text-dark",
-            "consulta_ambulatorial" => "badge bg-info text-dark",
-            "autocuidado" => "badge bg-success",
-            _ => "badge bg-secondary"
-        };
-
-        <div id="dx-results" class="mt-4">
-            <div class="d-flex justify-content-between align-items-start flex-wrap">
-                <h4 class="card-title mb-2">Resultados</h4>
-                <span class="@triageClass" title="Sugestão de nível de urgência">
-                    Triagem: @Model.DxResult.Triage
-                </span>
+    <div class="dx-card">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group mb-3">
+                <label for="text-input" class="form-label">Descreva seus sintomas:</label>
+                <textarea asp-for="InputText" class="form-control" id="text-input" rows="5"
+                    placeholder="Ex.: Febre há 2 dias, dor de garganta, coriza..."></textarea>
             </div>
-            <p class="text-muted mb-3">
-                Mostrando as hipóteses mais prováveis com suas respectivas confidências.
-            </p>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn-primary">Analisar</button>
+            </div>
+        </form>
 
-            @if (Model.DxResult.Predictions != null && Model.DxResult.Predictions.Any())
+        @if (!string.IsNullOrEmpty(Model?.MlStatusMessage))
+        {
+            <div class="alert alert-warning mt-3">@Model.MlStatusMessage</div>
+        }
+
+        @if (Model?.DxResult != null)
+        {
+            var triage = Model.DxResult.Triage?.ToLowerInvariant() ?? "";
+            var triageClass = triage switch
             {
-                <ol class="list-group list-group-numbered">
-                    @foreach (var p in Model.DxResult.Predictions.Take(3))
-                    {
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div><strong>@p.Label</strong></div>
-                            <span class="badge bg-primary rounded-pill">
-                                @p.Probability.ToString("P1")
-                            </span>
-                        </li>
-                    }
-                </ol>
-            }
-            else
-            {
-                <div class="alert alert-secondary mt-3">
-                    Não foi possível gerar hipóteses com confiança suficiente.
+                "emergente" => "badge bg-danger",
+                "procurar_atendimento" => "badge bg-warning text-dark",
+                "consulta_ambulatorial" => "badge bg-info text-dark",
+                "autocuidado" => "badge bg-success",
+                _ => "badge bg-secondary"
+            };
+
+            <div id="dx-results" class="mt-4">
+                <div class="d-flex justify-content-between align-items-start flex-wrap">
+                    <h4 class="card-title mb-2">Resultados</h4>
+                    <span class="@triageClass" title="Sugestão de nível de urgência">
+                        Triagem: @Model.DxResult.Triage
+                    </span>
                 </div>
-            }
-        </div>
 
-        <div class="alert alert-light border mt-3">
-            <small>
-                <strong>Observação:</strong> se as confidências estiverem baixas, descreva mais detalhes
-                (tempo de sintomas, intensidade da dor 0–10, febre (°C), comorbidades, gatilhos).
-            </small>
-        </div>
-    }
-  </div>
+                <p class="result-description" onclick="this.classList.toggle('expanded')">
+                    @if (Model.DxResult.Predictions != null && Model.DxResult.Predictions.Any())
+                    {
+                        @:Baseado nos sintomas, as hipóteses mais prováveis são:
+                        <ul>
+                            @foreach (var p in Model.DxResult.Predictions.Take(3))
+                            {
+                                <li>@p.Label (@p.Probability.ToString("P1"))</li>
+                            }
+                        </ul>
+                        @:Nível de triagem recomendado: <strong>@Model.DxResult.Triage</strong>.
+                    }
+                    else
+                    {
+                        @:Não foi possível gerar hipóteses com confiança suficiente.
+                    }
+                </p>
+
+                @if (Model.DxResult.Predictions != null && Model.DxResult.Predictions.Any())
+                {
+                    <ol class="list-group list-group-numbered mt-3">
+                        @foreach (var p in Model.DxResult.Predictions.Take(3))
+                        {
+                            <li class="list-group-item">
+                                <div><strong>@p.Label</strong></div>
+                                <span class="badge bg-primary rounded-pill">
+                                    @p.Probability.ToString("P1")
+                                </span>
+                            </li>
+                        }
+                    </ol>
+                }
+            </div>
+        }
+    </div>
 </div>
 
+<footer>
+    © 2025 ML_2025 - Aplicação de Análise de Sintomas
+</footer>
+
 <script>
+  // Scroll suave para os resultados
   (function () {
     const r = document.getElementById('dx-results');
-    if (r) r.scrollIntoView({behavior: 'smooth', block: 'start'});
+    if (r) r.scrollIntoView({ behavior: 'smooth', block: 'start' });
   })();
+
+  // Dark / Light mode toggle
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+  }
 </script>
+
+<button onclick="toggleTheme()" 
+    style="position: fixed; bottom: 1rem; right: 1rem; padding: 0.5rem 1rem; border-radius: 8px; background: var(--accent-dark); color: #fff; border: none; cursor: pointer;">
+    🌗 Modo
+</button>

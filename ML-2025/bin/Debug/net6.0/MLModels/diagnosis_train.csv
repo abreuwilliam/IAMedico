@@ -1,8 +1,20 @@
 Label,Text
-refluxo,"Azia após refeições, pior ao deitar, 
-sensação de comida ou líquido azedo subindo para a garganta ou boca,
- dor torácica, tosse seca, rouquidão, e uma sensação de nó na garganta, Azia, Regurgitação, "
-
-gripe,"febre, dor de garganta, tosse, dores no corpo e musculares, dor de cabeça e cansaço , Coriza"
-
-asma,"Chiado no peito, falta de ar à noite; melhora com broncodilatador, Falta de ar ou dificuldade para respirar, "
+refluxo,"Azia após refeições, pior ao deitar, sensação de comida ou líquido azedo subindo para a garganta ou boca, dor torácica, tosse seca, rouquidão, sensação de nó na garganta, regurgitação, queimação no peito."
+gripe,"Febre, dor de garganta, tosse, dores no corpo e musculares, dor de cabeça, cansaço, coriza, espirros, calafrios, mal-estar geral, perda de apetite."
+asma,"Chiado no peito, falta de ar, tosse seca, piora à noite ou de madrugada, aperto no peito, melhora com broncodilatador, dificuldade para respirar após esforço físico."
+sinusite,"Dor facial ou pressão na face, congestão nasal, secreção amarelada, dor de cabeça, febre baixa, mau hálito, sensação de peso na testa e bochechas."
+amigdalite,"Dor de garganta intensa, dificuldade para engolir, febre alta, ínguas no pescoço, placas brancas nas amígdalas, mau hálito, fadiga."
+bronquite,"Tosse persistente com catarro, chiado no peito, falta de ar, fadiga, desconforto torácico, piora pela manhã, sintomas após infecção respiratória."
+covid-19,"Febre, tosse seca, cansaço, perda de olfato e paladar, dor de cabeça, dor de garganta, falta de ar, congestão nasal, diarreia, dor muscular."
+diabetes,"Sede excessiva, urina em grande quantidade, fome aumentada, perda de peso inexplicável, fadiga, visão turva, feridas que demoram a cicatrizar, formigamento nas extremidades."
+hipertensão,"Dor de cabeça frequente, tontura, zumbido no ouvido, visão borrada, cansaço, palpitações, muitas vezes sem sintomas perceptíveis."
+enxaqueca,"Dor de cabeça intensa e pulsátil, geralmente em um lado da cabeça, náusea, sensibilidade à luz e sons, visão turva, aura visual antes da dor."
+gastrite,"Dor ou queimação no estômago, náusea, sensação de estômago cheio, arrotos, perda de apetite, dor pior após comer ou em jejum."
+anemia,"Cansaço, fraqueza, tontura, palidez, falta de ar ao esforço, unhas frágeis, palpitações, dificuldade de concentração."
+otite,"Dor de ouvido, febre, diminuição da audição, secreção pelo ouvido, irritabilidade em crianças, sensação de ouvido tampado."
+rinite,"Espirros, coceira no nariz e olhos, coriza clara, congestão nasal, piora com poeira, mofo ou mudanças de temperatura."
+dengue,"Febre alta, dor atrás dos olhos, dor muscular e nas articulações, manchas vermelhas na pele, náusea, fadiga, dor abdominal, sangramento gengival ou nasal."
+hepatite,"Cansaço, náusea, vômito, perda de apetite, dor abdominal, urina escura, fezes claras, pele e olhos amarelados (icterícia)."
+infecção urinária,"Ardência ao urinar, vontade frequente de urinar, dor na parte inferior do abdômen, urina turva ou com odor forte, febre baixa."
+depressão,"Tristeza persistente, falta de energia, perda de interesse, insônia ou sono excessivo, pensamentos negativos, alterações no apetite, dificuldade de concentração."
+ansiedade,"Preocupação excessiva, nervosismo, palpitações, falta de ar, suor nas mãos, insônia, tensão muscular, sensação de perigo iminente."

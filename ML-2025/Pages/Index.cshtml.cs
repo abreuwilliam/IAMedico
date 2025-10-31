@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; 
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.ML;
-using Microsoft.ML.Data; 
+using Microsoft.ML.Data;
 using ML_2025.Models;
+using ML_2025.Helpers;
 
 namespace ML_2025.Pages
 {
@@ -18,14 +20,15 @@ namespace ML_2025.Pages
             _engine = sp.GetService<PredictionEngine<SymptomData, SymptomPrediction>>();
         }
 
-        [BindProperty] public string? InputText { get; set; }
+        [BindProperty]
+        public string? InputText { get; set; }
 
         public DiagnosisResult? DxResult { get; private set; }
         public string? MlStatusMessage { get; private set; }
 
         public void OnGet() { }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (string.IsNullOrWhiteSpace(InputText))
                 return Page();
@@ -38,21 +41,9 @@ namespace ML_2025.Pages
 
             var pred = _engine.Predict(new SymptomData { Text = InputText });
 
-            if (pred.Score is null || pred.Score.Length == 0)
-            {
-                MlStatusMessage = "Score vazio. Verifique o pipeline (SdcaMaximumEntropy) e a coluna 'Score'.";
-                DxResult = new DiagnosisResult
-                {
-                    Triage = "consulta_ambulatorial",
-                    Predictions = new List<PredictionItem>
-                    {
-                        new PredictionItem { Label = pred.PredictedLabel, Probability = 0.0 }
-                    }
-                };
-                return Page();
-            }
+            // ✅ Salva log com Input e PredictedLabel
+            await Logger.SalvarLogAsync(InputText, pred.PredictedLabel);
 
-       
             string[] labels;
             try
             {
@@ -68,14 +59,6 @@ namespace ML_2025.Pages
 
             if (labels.Length != pred.Score.Length)
                 labels = Enumerable.Range(0, pred.Score.Length).Select(i => $"classe_{i}").ToArray();
-
-      
-            try
-            {
-                Console.WriteLine("[ML] Labels: " + string.Join(", ", labels));
-                Console.WriteLine("[ML] Scores: " + string.Join(", ", pred.Score.Select(s => s.ToString("F4"))));
-            }
-            catch { /* ignore */ }
 
             var items = Enumerable.Range(0, pred.Score.Length)
                 .Select(i => new PredictionItem { Label = labels[i], Probability = pred.Score[i] })
